@@ -7,27 +7,20 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^8",
-    "express": "^4",
-    "@sap/xssec": "^4",
-    "@cap-js/hana": "^1"
+    "express": "^4"
   },
   "devDependencies": {
-    "@cap-js/cds-types": "^0.6",
     "@cap-js/sqlite": "^1",
-    "@sap/cds-dk": "^8"
+    "@cap-js/cds-types": "^0.6"
   },
   "scripts": {
     "start": "cds-serve"
   },
-  "cds": {
-    "requires": {
-      "auth": "xsuaa",
-      "destinations": true,
-      "html5-repo": true,
-      "application-logging": true
-    },
-    "sql": {
-      "native_hana_associations": false
-    }
-  }
+  "cds": { "requires": {
+   "db": {
+      "kind": "sqlite",
+      "credentials": { "url": "db.sqlite" },
+      "schema_evolution": "auto"
+   }
+}}
 }
