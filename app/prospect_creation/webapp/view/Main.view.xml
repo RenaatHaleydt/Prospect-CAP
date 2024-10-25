@@ -1,7 +1,9 @@
 <mvc:View controllerName="prospectcreation.controller.Main"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+    xmlns="sap.m" xmlns:core="sap.ui.core">
     <Page id="page" title="{i18n>title}">
-        <content />
+        <content>
+            <core:Fragment fragmentName="prospectcreation.view.fragments.ProspectSimpleForm" type="XML"/>
+        </content>
     </Page>
 </mvc:View>

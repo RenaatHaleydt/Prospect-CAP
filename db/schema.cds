@@ -13,7 +13,7 @@ context Prospect {
         email          : String @title: 'Algemeen mailadres';
         projectnaam    : String @title: 'Naam van het project';
         kans           : Integer default 20;
-        contactpersoon : Association to Persons;
+        // contactpersoon : Association to Persons;
         prioriteit     : Association to Prioriteit default 'L';
     }
 
