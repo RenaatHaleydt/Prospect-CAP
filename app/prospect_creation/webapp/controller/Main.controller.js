@@ -15,7 +15,7 @@ function (Controller, MessageBox) {
                 email: null,
                 projectnaam: null,
                 kans: 20,
-                prioriteit_code: 'M',
+                prioriteit_code: null,
                 contactpersoon: {
                     voornaam: "Renaat",
                     familienaam: 'Haleydt',

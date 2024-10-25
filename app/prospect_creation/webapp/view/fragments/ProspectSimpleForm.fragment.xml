@@ -33,10 +33,12 @@
                 value="{prospectModel>/kans}"
             />
             <Label text="Prioriteit" />
-            <Input
-                id="prio"
-                value="{prospectModel>/prioriteit}"
-            />
+            <Select forceSelection="false" selectedKey="{prospectModel>/prioriteit_code}" items="{
+						path: '/Prioriteit',
+						sorter: { path: 'descr' }
+					}">
+                    <core:Item key="{code}" text="{descr}" />
+                    </Select>
         </f:content>
     </f:SimpleForm>
     <Button
