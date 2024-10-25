@@ -3,23 +3,44 @@
     xmlns:f="sap.ui.layout.form"
     xmlns:core="sap.ui.core"
 >
-<f:SimpleForm id="prospectForm"
-			editable="true"
-			layout="ResponsiveGridLayout"
-			title="Prospect"
-			singleContainerFullSize="false" >
-			<f:content>
-				<Label text="Bedrijfsnaam" />
-				<Input id="bedrijfsnaam" value="{prospectModel>/bedrijfsnaam}" />
-				<Label text="Email" />
-				<Input type="Email" value="{prospectModel>/email}" />
-				<Label text="Projectnaam" />
-				<Input id="projectnaam" value="{prospectModel>/projectnaam}" />
-				<Label text="Kans" />
-				<Input enabled="false" id="kans" value="{prospectModel>/kans}" />
-				<Label text="Prioriteit" />
-				<Input id="prie" value="{prospectModel>/prioriteit}" />
-			</f:content>
-		</f:SimpleForm>
-		<Button text="Create" press="onProspectCreation" />
+    <f:SimpleForm
+        id="prospectForm"
+        editable="true"
+        layout="ResponsiveGridLayout"
+        title="Prospect"
+        singleContainerFullSize="false"
+    >
+        <f:content>
+            <Label text="Bedrijfsnaam" />
+            <Input
+                id="bedrijfsnaam"
+                value="{prospectModel>/bedrijfsnaam}"
+            />
+            <Label text="Email" />
+            <Input
+                type="Email"
+                value="{prospectModel>/email}"
+            />
+            <Label text="Projectnaam" />
+            <Input
+                id="projectnaam"
+                value="{prospectModel>/projectnaam}"
+            />
+            <Label text="Kans" />
+            <Input
+                enabled="false"
+                id="kans"
+                value="{prospectModel>/kans}"
+            />
+            <Label text="Prioriteit" />
+            <Input
+                id="prio"
+                value="{prospectModel>/prioriteit}"
+            />
+        </f:content>
+    </f:SimpleForm>
+    <Button
+        text="Create"
+        press="onProspectCreation"
+    />
 </core:FragmentDefinition>

@@ -17,16 +17,5 @@
   "scripts": {
     "start": "cds-serve",
     "watch-prospect_creation": "cds watch --open prospect_creation/webapp/index.html?sap-ui-xx-viewCache=false"
-  },
-  "cds": {
-    "requires": {
-      "db": {
-        "kind": "sqlite",
-        "credentials": {
-          "url": "db.sqlite"
-        },
-        "schema_evolution": "auto"
-      }
-    }
   }
 }
