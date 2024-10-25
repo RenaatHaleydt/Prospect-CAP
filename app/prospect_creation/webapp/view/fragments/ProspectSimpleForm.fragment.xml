@@ -33,7 +33,8 @@
                 value="{prospectModel>/kans}"
             />
             <Label text="Prioriteit" />
-            <Select forceSelection="false" selectedKey="{prospectModel>/prioriteit_code}" items="{
+            <Select forceSelection="false" selectedKey="{prospectModel>/prioriteit_code}" 
+                items="{
 						path: '/Prioriteit',
 						sorter: { path: 'descr' }
 					}">
