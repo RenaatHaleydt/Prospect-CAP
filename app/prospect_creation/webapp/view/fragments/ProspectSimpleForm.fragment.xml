@@ -41,8 +41,4 @@
                     </Select>
         </f:content>
     </f:SimpleForm>
-    <Button
-        text="Create"
-        press="onProspectCreation"
-    />
 </core:FragmentDefinition>

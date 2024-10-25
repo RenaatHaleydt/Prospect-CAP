@@ -3,7 +3,14 @@
     xmlns="sap.m" xmlns:core="sap.ui.core">
     <Page id="page" title="{i18n>title}">
         <content>
-            <core:Fragment fragmentName="prospectcreation.view.fragments.ProspectSimpleForm" type="XML"/>
+            <VBox class="sapUiSmallMargin">
+                <core:Fragment fragmentName="prospectcreation.view.fragments.ProspectSimpleForm" type="XML"/>
+                <core:Fragment fragmentName="prospectcreation.view.fragments.PersonSimpleForm" type="XML"/>
+                <Button
+        text="Create"
+        press="onProspectCreation"
+    />
+            </VBox>
         </content>
     </Page>
 </mvc:View>

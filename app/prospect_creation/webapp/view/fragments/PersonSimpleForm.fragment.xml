@@ -1,0 +1,37 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:l="sap.ui.layout"
+>
+ <f:SimpleForm
+        id="personForm"
+        editable="true"
+        layout="ResponsiveGridLayout"
+        title="Prospect"
+        singleContainerFullSize="false"
+    >
+        <f:content>
+            <Label text="Voornaam &amp; naam" />
+            <Input
+                value="{prospectModel>/contactpersoon/voornaam}"
+            ><layoutData>
+						<l:GridData span="XL6 L6 M6 S6" />
+					</layoutData>
+            </Input>
+            <Input
+                value="{prospectModel>/contactpersoon/familienaam}"
+            />
+            <Label text="Email" />
+            <Input
+                type="Email"
+                value="{prospectModel>/contactpersoon/email}"
+            />
+            <Label text="Telefoon" />
+            <Input
+                value="{prospectModel>/contactpersoon/telefoon}"
+            />
+            
+        </f:content>
+    </f:SimpleForm>
+</core:FragmentDefinition>
