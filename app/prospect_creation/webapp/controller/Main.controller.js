@@ -14,7 +14,14 @@ function (Controller, MessageBox) {
                 bedrijfsnaam: null,
                 email: null,
                 projectnaam: null,
-                kans: 20
+                kans: 20,
+                prioriteit_code: 'M',
+                contactpersoon: {
+                    voornaam: "Renaat",
+                    familienaam: 'Haleydt',
+                    email: "info@renaat.be",
+                    telefoon: "09876543"
+                }
             });
 
             // Lokaal JSON model binden aan de view, zodat we aan de data kunnen in de view en omgekeerd
