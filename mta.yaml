@@ -8,6 +8,7 @@ modules:
   path: gen/srv
   requires:
   - name: erp_applications_prospect-db
+  - name: uaa_erp_applications_prospect
   provides:
   - name: srv-api
     properties:
@@ -27,6 +28,7 @@ modules:
     buildpack: nodejs_buildpack
 - name: erp_applications_prospect-destination-content
   type: com.sap.application.content
+  path: .
   requires:
   - name: erp_applications_prospect-destination-service
     parameters:
@@ -55,10 +57,51 @@ modules:
         existing_destinations_policy: ignore
   build-parameters:
     no-source: true
+- name: erp_applications_prospect-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: erp_applications_prospect_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - prospectcreation.zip
+      name: prospectcreation
+      target-path: resources/
+    - artifacts:
+      - prospectmanagement.zip
+      name: prospectmanagement
+      target-path: resources/
+- name: prospectcreation
+  type: html5
+  path: app/prospect_creation
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: prospectmanagement
+  type: html5
+  path: app/prospect_management
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
 resources:
 - name: erp_applications_prospect-db
   type: com.sap.xs.hdi-container
   parameters:
+    config:
+      schema: PROSPECT
+      xsappname: erp_applications_prospect
     service: hana
     service-plan: hdi-shared
 - name: erp_applications_prospect-destination-service
@@ -66,10 +109,28 @@ resources:
   parameters:
     config:
       HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          - Authentication: NoAuthentication
+            HTML5.DynamicDestination: true
+            HTML5.ForwardAuthToken: true
+            Name: erp_applications_prospect-srv-api
+            ProxyType: Internet
+            Type: HTTP
+            URL: ~{srv-api/srv-url}
+          existing_destinations_policy: update
       version: 1.0.0
     service: destination
     service-name: erp_applications_prospect-destination-service
     service-plan: lite
+  requires:
+  - name: srv-api
 - name: erp_applications_prospect_html_repo_host
   type: org.cloudfoundry.managed-service
   parameters:
@@ -84,10 +145,11 @@ resources:
     service-name: erp_applications_prospect-xsuaa-service
     service-plan: application
 parameters:
+  deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
   - builder: custom
     commands:
     - npm ci
-    - npx cds build --production
+    - npx -p @sap/cds-dk cds build --production
