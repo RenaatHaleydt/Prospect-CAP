@@ -1,0 +1,66 @@
+{
+  "requires": {
+    "[hybrid]": {
+      "destinations": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "44a4fb04trial",
+          "space": "dev",
+          "instance": "erp_applications_prospect-destination-service",
+          "key": "erp_applications_prospect-destination-service-key",
+          "resolved": false
+        },
+        "kind": "destinations",
+        "vcap": {
+          "name": "destinations"
+        }
+      },
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "44a4fb04trial",
+          "space": "dev",
+          "instance": "erp_applications_prospect-db",
+          "key": "erp_applications_prospect-db-key",
+          "resolved": false
+        },
+        "kind": "hana-cloud",
+        "vcap": {
+          "name": "db"
+        }
+      },
+      "auth": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "44a4fb04trial",
+          "space": "dev",
+          "instance": "erp_applications_prospect-xsuaa-service",
+          "key": "uaa_erp_applications_prospect-key",
+          "resolved": false
+        },
+        "kind": "xsuaa-auth",
+        "vcap": {
+          "name": "auth"
+        }
+      },
+      "connectivity": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "44a4fb04trial",
+          "space": "dev",
+          "instance": "erp_applications_prospect-connectivity",
+          "key": "erp_applications_prospect-connectivity-key",
+          "resolved": false
+        },
+        "kind": "connectivity",
+        "vcap": {
+          "name": "connectivity"
+        }
+      }
+    }
+  }
+}
