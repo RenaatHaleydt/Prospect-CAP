@@ -8,6 +8,7 @@ modules:
   path: gen/srv
   requires:
   - name: erp_applications_prospect-db
+  - name: connectivity
   - name: uaa_erp_applications_prospect
   provides:
   - name: srv-api
@@ -104,6 +105,12 @@ resources:
       xsappname: erp_applications_prospect
     service: hana
     service-plan: hdi-shared
+- name: connectivity
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: connectivity
+    service-name: erp_applications_prospect-connectivity
+    service-plan: lite
 - name: erp_applications_prospect-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
