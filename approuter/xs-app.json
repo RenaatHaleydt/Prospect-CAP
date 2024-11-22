@@ -1,5 +1,5 @@
 {
-    "authenticationMethod": "none",
+    "authenticationMethod": "route",
     "routes": [
       {
         "source": "^/api_docii/(.*)$",
