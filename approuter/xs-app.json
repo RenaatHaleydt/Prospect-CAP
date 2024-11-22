@@ -1,0 +1,33 @@
+{
+    "authenticationMethod": "none",
+    "routes": [
+      {
+        "source": "^/api_docii/(.*)$",
+        "target": "/$1",
+        "destination": "api-docii",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/sap_ias/(.*)$",
+        "target": "/$1",
+        "destination": "SAP_IAS_Manage_Users",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/v2/danoneservice/(.*)$",
+        "target": "/v2/danoneservice/$1",
+        "destination": "env_destination_backend",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/(.*)$",
+        "target": "$1",
+        "destination": "env_destination_backend",
+        "authenticationType": "xsuaa",
+        "csrfProtection": false
+      }
+    ]
+  }

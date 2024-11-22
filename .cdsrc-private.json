@@ -38,7 +38,7 @@
           "org": "44a4fb04trial",
           "space": "dev",
           "instance": "erp_applications_prospect-xsuaa-service",
-          "key": "uaa_erp_applications_prospect-key",
+          "key": "erp_applications_prospect-xsuaa-service-key",
           "resolved": false
         },
         "kind": "xsuaa-auth",

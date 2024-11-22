@@ -34,3 +34,15 @@ mta_archives/
 
 # @cap-js/cds-typer
 @cds-models
+
+# added by cds
+.cdsrc-private.json
+
+# added by cds
+.cdsrc-private.json
+
+# added by cds
+.cdsrc-private.json
+
+# added by cds
+.cdsrc-private.json
