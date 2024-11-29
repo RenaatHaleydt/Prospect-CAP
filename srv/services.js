@@ -1,27 +1,24 @@
 const httpclient = require("@sap-cloud-sdk/http-client");
 
 module.exports = async function (srv) {
-  srv.before("CREATE", "Prospects", async (oReq) => {
-    console.log("let's try")
+  srv.after("CREATE", "Prospects", async (oReq) => {
+    let oData = {
+      "definitionId": "us10.44a4fb04trial.prospectprocess.prospectProcess",
+      "context": {
+        "prospect": {
+          "bedrijfsNaam": oReq.bedrijfsnaam,
+          "email": oReq.email,
+          "projectNaam": oReq.projectnaam
+        }
+      }
+    }
+
+    let oResponse = await startBusinessProcess(oData)
   });
 
   srv.before("READ", "Prospects", async (oReq) => {
     let products = await getFirstProductFromNorthwind()
   });
-
-  srv.on("TriggerBusinessProcess", async (oReq) => {
-    let oData = {
-      "definitionId": "us10.44a4fb04trial.prospectprocess.prospectProcess",
-      "context": {
-        "prospect": {
-          "bedrijfsNaam": "cynalco",
-          "email": "infodsfg",
-          "projectNaam": "testings"
-        }
-      }
-    }
-    return await startBusinessProcess(oData)
-  })
 }
 
 async function getFirstProductFromNorthwind() {
