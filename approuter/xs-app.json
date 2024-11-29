@@ -9,9 +9,9 @@
         "csrfProtection": false
       },
       {
-        "source": "^/sap_ias/(.*)$",
+        "source": "^/bpmworkflowruntime/(.*)$",
         "target": "/$1",
-        "destination": "SAP_IAS_Manage_Users",
+        "destination": "bpmworkflowruntime",
         "authenticationType": "xsuaa",
         "csrfProtection": false
       },

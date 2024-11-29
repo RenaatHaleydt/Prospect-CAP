@@ -6,8 +6,8 @@
             "forwardAuthToken": true
         },
         {
-            "name": "SAP_IAS_Manage_Users",
-            "url": "http://SAP_IAS_Manage_Users.dest",
+            "name": "bpmworkflowruntime",
+            "url": "http://bpmworkflowruntime.dest",
             "forwardAuthToken": true
         }
     ]
