@@ -9,6 +9,8 @@
     "@sap-cloud-sdk/core": "^1.54.2",
     "@sap-cloud-sdk/http-client": "^3.22.2",
     "@sap/cds": "^8",
+    "@sap/hana-client": "^2.22.32",
+    "@sap/cds-hana": "^2",
     "@sap/xssec": "^4.2.7",
     "express": "^4"
   },
@@ -25,19 +27,24 @@
     "watch-prospect_management": "cds watch --open prospect_management/webapp/index.html?sap-ui-xx-viewCache=false",
     "undeploy": "cf undeploy erp_applications_prospect --delete-services --delete-service-keys --delete-service-brokers",
     "build": "rimraf resources mta_archives && mbt build --mtar archive",
-     "deploy": "npm i && npm run build && cf deploy mta_archives/archive.mtar --retries 1",
+    "deploy": "npm i && npm run build && cf deploy mta_archives/archive.mtar --retries 1",
     "approuter": "cds bind --exec -- npm start --prefix approuter"
   },
   "sapux": [
     "app/prospect_management"
   ],
-  "requires": {
-    "auth": {
-      "kind": "xsuaa"
-    },
-    "[hybrid]": {
+  "cds": {
+    "requires": {
       "auth": {
-        "kind": "jwt-auth"
+        "kind": "xsuaa"
+      },
+      "[hybrid]": {
+        "auth": {
+          "kind": "jwt-auth"
+        }
+      },
+      "db": {
+        "kind": "hana"
       }
     }
   }

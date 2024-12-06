@@ -19,6 +19,14 @@ module.exports = async function (srv) {
   srv.before("READ", "Prospects", async (oReq) => {
     let products = await getFirstProductFromNorthwind()
   });
+
+  srv.on("TriggerBusinessProcess", async (oReq) => {
+    // Wat krijgen we binnen:
+    console.log(`We krijgen het volgende van data binnen: ${oReq.data.Context}`)
+    // Context komt van de services.cds
+
+    await startBusinessProcess(oReq.data.Context)
+  })
 }
 
 async function getFirstProductFromNorthwind() {
@@ -41,6 +49,9 @@ async function getFirstProductFromNorthwind() {
   return oResponse.data;
 }
 
+// De destination die hier gebruikt wordt komt van volgende tutorial:
+// https://developers.sap.com/tutorials/spa-create-service-instance-destination.html
+// Alleen is de naam wat aangepast
 async function startBusinessProcess(payload) {
   let oResponse = await httpclient.executeHttpRequest({
     destinationName: 'bpmworkflowruntime'
@@ -50,7 +61,7 @@ async function startBusinessProcess(payload) {
     headers: {
       "Content-Type": 'application/json'
     },
-    data: oData
+    data: payload
   }).catch(oError => {
     console.log(`Something went wrong connecting to the Build Process Automation destination`)
     return null
