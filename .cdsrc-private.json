@@ -16,21 +16,6 @@
           "name": "destinations"
         }
       },
-      "db": {
-        "binding": {
-          "type": "cf",
-          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
-          "org": "44a4fb04trial",
-          "space": "dev",
-          "instance": "erp_applications_prospect-db",
-          "key": "erp_applications_prospect-db-key",
-          "resolved": false
-        },
-        "kind": "hana-cloud",
-        "vcap": {
-          "name": "db"
-        }
-      },
       "auth": {
         "binding": {
           "type": "cf",
@@ -59,6 +44,21 @@
         "kind": "connectivity",
         "vcap": {
           "name": "connectivity"
+        }
+      },
+      "db": {
+        "binding": {
+          "type": "cf",
+          "apiEndpoint": "https://api.cf.us10-001.hana.ondemand.com",
+          "org": "44a4fb04trial",
+          "space": "dev",
+          "instance": "erp_applications_prospect-db",
+          "key": "erp_applications_prospect-db-key",
+          "resolved": false
+        },
+        "kind": "hana-cloud",
+        "vcap": {
+          "name": "db"
         }
       }
     }

@@ -3,160 +3,166 @@ ID: erp_applications_prospect
 description: A simple CAP project.
 version: 1.0.0
 modules:
-- name: erp_applications_prospect-srv
-  type: nodejs
-  path: gen/srv
-  requires:
-  - name: erp_applications_prospect-db
-  - name: connectivity
-  - name: uaa_erp_applications_prospect
-  provides:
-  - name: srv-api
-    properties:
-      srv-url: ${default-url}
-  parameters:
-    buildpack: nodejs_buildpack
-    readiness-health-check-http-endpoint: /health
-    readiness-health-check-type: http
-  build-parameters:
-    builder: npm
-- name: erp_applications_prospect-db-deployer
-  type: hdb
-  path: gen/db
-  requires:
-  - name: erp_applications_prospect-db
-  parameters:
-    buildpack: nodejs_buildpack
-- name: erp_applications_prospect-destination-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: erp_applications_prospect-destination-service
-    parameters:
-      content-target: true
-  - name: erp_applications_prospect_html_repo_host
-    parameters:
-      service-key:
-        name: erp_applications_prospect_html_repo_host-key
-  - name: uaa_erp_applications_prospect
-    parameters:
-      service-key:
-        name: uaa_erp_applications_prospect-key
-  parameters:
-    content:
-      instance:
-        destinations:
-        - Name: prospects_erp_applications_prospect_html_repo_host
-          ServiceInstanceName: erp_applications_prospect-html5-app-host-service
-          ServiceKeyName: erp_applications_prospect_html_repo_host-key
-          sap.cloud.service: prospects
-        - Authentication: OAuth2UserTokenExchange
-          Name: prospects_uaa_erp_applications_prospect
-          ServiceInstanceName: erp_applications_prospect-xsuaa-service
-          ServiceKeyName: uaa_erp_applications_prospect-key
-          sap.cloud.service: prospects
-        existing_destinations_policy: ignore
-  build-parameters:
-    no-source: true
-- name: erp_applications_prospect-app-content
-  type: com.sap.application.content
-  path: .
-  requires:
-  - name: erp_applications_prospect_html_repo_host
-    parameters:
-      content-target: true
-  build-parameters:
-    build-result: resources
+  - name: erp_applications_prospect-srv
+    type: nodejs
+    path: gen/srv
     requires:
-    - artifacts:
-      - prospectcreation.zip
-      name: prospectcreation
-      target-path: resources/
-    - artifacts:
-      - prospectmanagement.zip
-      name: prospectmanagement
-      target-path: resources/
-- name: prospectcreation
-  type: html5
-  path: app/prospect_creation
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: prospectmanagement
-  type: html5
-  path: app/prospect_management
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-resources:
-- name: erp_applications_prospect-db
-  type: com.sap.xs.hdi-container
-  parameters:
-    config:
-      schema: PROSPECT
-      xsappname: erp_applications_prospect
-    service: hana
-    service-plan: hdi-shared
-- name: connectivity
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: connectivity
-    service-name: erp_applications_prospect-connectivity
-    service-plan: lite
-- name: erp_applications_prospect-destination-service
-  type: org.cloudfoundry.managed-service
-  parameters:
-    config:
-      HTML5Runtime_enabled: true
-      init_data:
+      - name: erp_applications_prospect-db
+      - name: connectivity
+      - name: uaa_erp_applications_prospect
+      - name: erp_applications_prospect-destination-service
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: ${default-url}
+    parameters:
+      buildpack: nodejs_buildpack
+      readiness-health-check-http-endpoint: /health
+      readiness-health-check-type: http
+    build-parameters:
+      builder: npm
+  - name: erp_applications_prospect-db-deployer
+    type: hdb
+    path: gen/db
+    requires:
+      - name: erp_applications_prospect-db
+    parameters:
+      buildpack: nodejs_buildpack
+  - name: erp_applications_prospect-destination-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: erp_applications_prospect-destination-service
+        parameters:
+          content-target: true
+      - name: erp_applications_prospect_html_repo_host
+        parameters:
+          service-key:
+            name: erp_applications_prospect_html_repo_host-key
+      - name: uaa_erp_applications_prospect
+        parameters:
+          service-key:
+            name: uaa_erp_applications_prospect-key
+    parameters:
+      content:
         instance:
           destinations:
-          - Authentication: NoAuthentication
-            Name: ui5
-            ProxyType: Internet
-            Type: HTTP
-            URL: https://ui5.sap.com
-          - Authentication: NoAuthentication
-            HTML5.DynamicDestination: true
-            HTML5.ForwardAuthToken: true
-            Name: erp_applications_prospect-srv-api
-            ProxyType: Internet
-            Type: HTTP
-            URL: ~{srv-api/srv-url}
-          existing_destinations_policy: update
-      version: 1.0.0
-    service: destination
-    service-name: erp_applications_prospect-destination-service
-    service-plan: lite
-  requires:
-  - name: srv-api
-- name: erp_applications_prospect_html_repo_host
-  type: org.cloudfoundry.managed-service
-  parameters:
-    service: html5-apps-repo
-    service-name: erp_applications_prospect-html5-app-host-service
-    service-plan: app-host
-- name: uaa_erp_applications_prospect
-  type: org.cloudfoundry.managed-service
-  parameters:
-    path: ./xs-security.json
-    service: xsuaa
-    service-name: erp_applications_prospect-xsuaa-service
-    service-plan: application
+            - Name: prospects_erp_applications_prospect_html_repo_host
+              ServiceInstanceName: erp_applications_prospect-html5-app-host-service
+              ServiceKeyName: erp_applications_prospect_html_repo_host-key
+              sap.cloud.service: prospects
+            - Authentication: OAuth2UserTokenExchange
+              Name: prospects_uaa_erp_applications_prospect
+              ServiceInstanceName: erp_applications_prospect-xsuaa-service
+              ServiceKeyName: uaa_erp_applications_prospect-key
+              sap.cloud.service: prospects
+          existing_destinations_policy: ignore
+    build-parameters:
+      no-source: true
+  - name: erp_applications_prospect-app-content
+    type: com.sap.application.content
+    path: .
+    requires:
+      - name: erp_applications_prospect_html_repo_host
+        parameters:
+          content-target: true
+    build-parameters:
+      build-result: resources
+      requires:
+        - artifacts:
+            - prospectcreation.zip
+          name: prospectcreation
+          target-path: resources/
+        - artifacts:
+            - prospectmanagement.zip
+          name: prospectmanagement
+          target-path: resources/
+  - name: prospectcreation
+    type: html5
+    path: app/prospect_creation
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+  - name: prospectmanagement
+    type: html5
+    path: app/prospect_management
+    build-parameters:
+      build-result: dist
+      builder: custom
+      commands:
+        - npm install
+        - npm run build:cf
+      supported-platforms:
+        []
+resources:
+  - name: erp_applications_prospect-db
+    type: com.sap.xs.hdi-container
+    parameters:
+      config:
+        schema: PROSPECT
+        xsappname: erp_applications_prospect
+      service: hana
+      service-plan: hdi-shared
+  - name: connectivity
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: connectivity
+      service-name: erp_applications_prospect-connectivity
+      service-plan: lite
+  - name: erp_applications_prospect-destination-service
+    type: org.cloudfoundry.managed-service
+    parameters:
+      config:
+        HTML5Runtime_enabled: true
+        init_data:
+          instance:
+            destinations:
+              - Authentication: NoAuthentication
+                Name: ui5
+                ProxyType: Internet
+                Type: HTTP
+                URL: https://ui5.sap.com
+              - Authentication: NoAuthentication
+                HTML5.DynamicDestination: true
+                HTML5.ForwardAuthToken: true
+                Name: erp_applications_prospect-srv-api
+                ProxyType: Internet
+                Type: HTTP
+                URL: ~{srv-api/srv-url}
+            existing_destinations_policy: update
+        version: 1.0.0
+      service: destination
+      service-name: erp_applications_prospect-destination-service
+      service-plan: lite
+    requires:
+      - name: srv-api
+  - name: erp_applications_prospect_html_repo_host
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: html5-apps-repo
+      service-name: erp_applications_prospect-html5-app-host-service
+      service-plan: app-host
+  - name: uaa_erp_applications_prospect
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service: xsuaa
+      service-name: erp_applications_prospect-xsuaa-service
+      service-plan: application
+      config:
+        xsappname: erp_applications_prospect-${org}-${space}
+        tenant-mode: dedicated
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true
 build-parameters:
   before-all:
-  - builder: custom
-    commands:
-    - npm ci
-    - npx -p @sap/cds-dk cds build --production
+    - builder: custom
+      commands:
+        - npm ci
+        - npx -p @sap/cds-dk cds build --production

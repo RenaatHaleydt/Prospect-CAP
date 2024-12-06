@@ -57,7 +57,7 @@ async function startBusinessProcess(payload) {
     destinationName: 'bpmworkflowruntime'
   }, {
     method: 'POST',
-    url: '/public/workflow/rest/v1/workflow-instances',
+    url: '/workflow/rest/v1/workflow-instances',
     headers: {
       "Content-Type": 'application/json'
     },

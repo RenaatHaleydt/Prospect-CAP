@@ -35,16 +35,29 @@
   ],
   "cds": {
     "requires": {
-      "auth": {
-        "kind": "xsuaa"
+      "[development]": {
+        "db": {
+          "kind": "sqlite",
+          "credentials": {
+            "database": ":memory:"
+          }
+        }
       },
       "[hybrid]": {
         "auth": {
           "kind": "jwt-auth"
+        },
+        "db": {
+          "kind": "hana"
         }
       },
-      "db": {
-        "kind": "hana"
+      "[production]": {
+        "db": {
+          "kind": "hana"
+        },
+        "auth": {
+          "kind": "xsuaa"
+        }
       }
     }
   }
